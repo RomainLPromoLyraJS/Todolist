@@ -5,6 +5,7 @@ import './counter.scss';
 
 const Counter = ({ nbTasks }) => (
   <p className="ongoing-tasks">{nbTasks} tâches en cours</p>
+
 );
 
 Counter.propTypes = {

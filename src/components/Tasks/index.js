@@ -8,7 +8,7 @@ const Tasks = ({ tasks }) => (
   <ul>
     {tasks.map((task) => (
       // la key sera toujours sur la première ligne après le map
-      <li key={task.id} className="tasks__item">
+      <li key={task.id} className="tasks__item tasks__item--completed">
         <label>
           <input type="checkbox" />
           {task.label}

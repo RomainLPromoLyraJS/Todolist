@@ -31,6 +31,11 @@ class App extends React.Component {
     this.addTaskFromInput = this.addTaskFromInput.bind(this);
   }
 
+  getOnGoingTasks() {
+    const onGoingTasks = this.state.tasks.filter((task) => !task.done);
+    return onGoingTasks.length;
+  }
+
   // une méthode pour modifier la propriété inputValue dans le state
   setInputValue(newValue) {
     this.setState({ inputValue: newValue });
@@ -80,7 +85,7 @@ class App extends React.Component {
           inputValue={inputValue}
         />
         {/* On donne à Counter le nombre de tâches */}
-        <Counter nbTasks={3} />
+        <Counter nbTasks={this.getOnGoingTasks()} />
         {/* On donne à <Tasks> la liste des tâches */}
         <Tasks tasks={tasks} />
       </div>
