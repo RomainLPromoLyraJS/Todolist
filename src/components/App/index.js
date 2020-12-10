@@ -29,10 +29,13 @@ class App extends React.Component {
     // on veut que notre methode garde son contexte même quand on la détache
     this.setInputValue = this.setInputValue.bind(this);
     this.addTaskFromInput = this.addTaskFromInput.bind(this);
+    this.onGoingTasks = this.getOnGoingTasks.bind(this);
+    this.toggleTask = this.toggleTask.bind(this);
   }
 
   getOnGoingTasks() {
-    const onGoingTasks = this.state.tasks.filter((task) => !task.done);
+    const { tasks } = this.state;
+    const onGoingTasks = tasks.filter((task) => !task.done);
     return onGoingTasks.length;
   }
 
@@ -74,6 +77,20 @@ class App extends React.Component {
     });
   }
 
+  toggleTask(taskId) {
+    console.log('je suis le taskId', taskId);
+    this.setState((state) => {
+      const updatedTasks = state.tasks.map((task) => {
+        if (task.id !== taskId) return task; // si pas la tâche visée, on la réutilise telle quelle
+        return { ...task, done: !task.done }; // sinon, on remplace par une copie mise-à-jour
+      });
+
+      return {
+        tasks: updatedTasks,
+      };
+    });
+  }
+
   render() {
     const { tasks, inputValue } = this.state;
 
@@ -87,7 +104,7 @@ class App extends React.Component {
         {/* On donne à Counter le nombre de tâches */}
         <Counter nbTasks={this.getOnGoingTasks()} />
         {/* On donne à <Tasks> la liste des tâches */}
-        <Tasks tasks={tasks} />
+        <Tasks tasks={tasks} onOffTask={this.toggleTask} />
       </div>
     );
   }

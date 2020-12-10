@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 
 import './tasks.scss';
 
-const Tasks = ({ tasks }) => (
+const Tasks = ({ tasks, onOffTask }) => (
   <ul>
     {tasks.map((task) => (
       // la key sera toujours sur la première ligne après le map
-      <li key={task.id} className="tasks__item tasks__item--completed">
+      <li key={task.id} className={task.done ? 'tasks__item tasks__item--completed' : 'tasks__item'}>
         <label>
-          <input type="checkbox" />
+          <input checked={task.done} type="checkbox" onChange={() => onOffTask(task.id)} />
           {task.label}
         </label>
       </li>
@@ -26,6 +26,7 @@ Tasks.propTypes = {
       done: PropTypes.bool.isRequired,
     }),
   ).isRequired,
+  onOffTask: PropTypes.func.isRequired,
 };
 
 export default Tasks;
