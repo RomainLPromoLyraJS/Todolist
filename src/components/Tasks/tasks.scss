@@ -1,0 +1,15 @@
+.tasks {
+  &__item {
+    border-radius: .3rem;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    font-size: 1.2rem;
+    margin: 0.4em 0;
+    padding: 1em;
+
+    &--completed {
+      opacity: 0.5;
+      text-decoration: line-through;
+    }
+  }
+}
